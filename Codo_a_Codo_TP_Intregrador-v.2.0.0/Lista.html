@@ -1,0 +1,45 @@
+<!-- listaOradores.html -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Oradores</title>
+</head>
+<body>
+
+    <h2>Lista de Oradores</h2>
+    <table border="1" id="tablaOradores">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Tema</th>
+            <th>Fecha de Alta</th>
+        </tr>
+        <!-- Los datos se cargarán aquí mediante JavaScript -->
+    </table>
+
+    <script>
+        // Lógica JavaScript para cargar los datos
+        fetch('http://localhost:8080/web-app-23544/api/orador/lista')
+            .then(response => response.json())
+            .then(oradores => {
+                const tablaOradores = document.getElementById('tablaOradores');
+                oradores.forEach(orador => {
+                    const row = tablaOradores.insertRow(-1);
+                    row.insertCell(0).textContent = orador.id;
+                    row.insertCell(1).textContent = orador.nombre;
+                    row.insertCell(2).textContent = orador.apellido;
+                    row.insertCell(3).textContent = orador.email;
+                    row.insertCell(4).textContent = orador.tema;
+                    row.insertCell(5).textContent = orador.fechaAlta;
+                });
+            })
+            .catch(error => console.error('Error al obtener los datos:', error));
+    </script>
+
+</body>
+</html>

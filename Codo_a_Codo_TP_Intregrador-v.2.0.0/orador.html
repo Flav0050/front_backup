@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" href="/media/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style/admin.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet"> 
+<!-- Bootstrap 5 CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+<!-- Font Awesome CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <!-- Logo en la izquierda -->
+            <img src="media/codoacodo-sm.png" alt="">
+    
+            <!-- Botón de hamburguesa para dispositivos móviles -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <!-- Contenido del navbar -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <!-- Elementos del navbar, si es necesario -->
+    
+                    <!-- Enlace de cerrar sesión a la derecha -->
+                    <li class="nav-item navbar-user">
+                        <a class="nav-link" href="#">Cerrar sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!--nuevo-->
+    <div class="nuevoOrador">
+    <div class="container mt-4">
+        <fieldset>
+            <legend class="h4" id="title">Agregar nuevo orador</legend>
+            <form>
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre">
+                </div>
+                <div class="mb-3">
+                    <label for="apellido" class="form-label">Apellido</label>
+                    <input type="text" class="form-control" id="apellido" placeholder="Ingrese el apellido">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Ingrese el correo electrónico">
+                </div>
+                <div class="mb-3">
+                    <label for="tema" class="form-label">Tema</label>
+                    <input type="text" class="form-control" id="tema" placeholder="Ingrese el tema">
+                </div>
+                <button type="button" class="btn btn-primary" id="btnCrear">Agregar</button>
+            </form>
+        </fieldset>
+    </div>
+</div>
+
+
+                                                
+
+
+<button class="btn btn-success" id="btnToggleUsers">
+    Mostrar Oradores
+</button>
+<div class="oradores">
+
+    <div class="oradores_lista" id="orador_conteiner">
+        <div class="row">
+            <div class="col-12 mt-1" id="msj">
+
+            </div>
+            <div class="users">
+                
+            <div class="col-12">
+                <div id="users">
+                    <legend class="h4" id="title">Lista de oradores</legend>
+                    <table class="table table-striped table-bordered">
+                        
+                        <thead class="thead-dark">
+                            
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Tema</th>
+                                <th scope="col">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersRows">                          
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div></div>
+
+    <footer class="mt-5">
+        <p class="text-center">© 2023 Codo a Codo</p>
+      </footer>
+
+    <script>
+        let usersVisible = false; // Variable para controlar la visibilidad de los oradores
+    
+        function toggleUsers() {
+    // Invierte el valor de la variable
+    usersVisible = !usersVisible;
+
+    const oradoresLista = document.getElementById('orador_conteiner'); // Obtener el elemento con la clase 'oradores_lista'
+
+    if (usersVisible) {
+        // Si los oradores deben ser visibles, muestra la tabla y cambia el texto del botón
+        oradoresLista.style.display = 'block'; // Asegúrate de que la lista de oradores se muestra
+        listarOradores();
+        document.getElementById('btnToggleUsers').innerText = 'Ocultar Oradores';
+    } else {
+        // Si los oradores deben estar ocultos, oculta la lista y cambia el texto del botón
+        oradoresLista.style.display = 'none';
+        document.getElementById('btnToggleUsers').innerText = 'Mostrar Oradores';
+    }
+}
+
+// Asigna el evento al botón
+document.getElementById('btnToggleUsers').addEventListener('click', toggleUsers);
+
+    </script>
+
+<script>
+    crearOperador = () => {
+        // Obtener los valores de los campos
+        const nombre = document.getElementById("nombre").value;
+        const apellido = document.getElementById("apellido").value;
+        const email = document.getElementById("email").value;
+        const tema = document.getElementById("tema").value;
+
+        // Verificar que todos los campos estén completos
+        if (!nombre || !apellido || !email || !tema) {
+            alert("Por favor, complete todos los campos.");
+            return;
+        }
+
+        // Mostrar un cuadro de diálogo de confirmación
+        const confirmacion = confirm(`Desea agregar el Orador ${nombre} ${apellido}?`);
+
+        // Verificar la respuesta del usuario
+        if (confirmacion) {
+            const orador = {
+                nombre: nombre,
+                apellido: apellido,
+                email: email,
+                tema: tema
+            };
+
+            // Enviar datos al servidor
+            fetch(`http://localhost:8080/web-app-23544/api/orador`, {
+                method: "POST",
+                body: JSON.stringify(orador),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(json => {
+                alert(`Se agregó el orador ${nombre} ${apellido}.`);
+                // Limpiar los campos después de enviar
+                document.getElementById("nombre").value = "";
+                document.getElementById("apellido").value = "";
+                document.getElementById("email").value = "";
+                document.getElementById("tema").value = "";
+            })
+            .catch(err => console.log(err));
+        }
+    }
+
+    document.getElementById("btnCrear").addEventListener('click', crearOperador);
+</script>
+
+    
+    <!--listado-->
+    <script>
+        function listarOradores() {/*f2*/
+            //1 preparar
+            const respuesta = fetch(`http://localhost:8080/web-app-23544/api/orador`);
+
+            //2 invocar
+            respuesta
+                .then(response => response.json())
+                .then(data => procesarListado(data))//fulfilled
+                .catch(error => dibujarError(error))//rejected
+        }
+        function procesarListado(data) {
+            const listarOradores = data;
+            let rows = '';
+            for(let orador of listarOradores) {
+                console.log(orador);
+                rows += `
+                <tr>
+                    <th scope="row">${orador.id}</th>
+                    <td>${orador.nombre}</td>
+                    <td>${orador.apellido}</td>
+                    <td>${orador.mail}</td>
+                    <td>${orador.tema}</td>
+                    <td>
+                        <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" data-bs-toggle="modal" data-bs-target="#editarModal" data-id="${orador.id}" onclick="abrirModalEditar(${orador.id})">
+                            <i class="fa fa-edit"></i>
+</button>
+                        <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar" onclick="eliminarOrador(${orador.id})">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                `
+            }
+            document.getElementById('usersRows').innerHTML = rows;
+        }
+
+        function dibujarError(error) {
+            console.log(error);
+            const alerta = `<div class="alert alert-danger" role="alert">
+                ${error.toString()}
+            </div>`;
+            document.getElementById('msj').innerHTML = alerta;
+        }
+
+        document.getElementById('btnGetUsers').addEventListener('click',listarOradores);
+        listarOradores();
+
+</script>
+
+    <!--eliminar-->
+    <script>
+        eliminarOrador = (id) => {
+            if(!confirm('SEGURO?')) {
+                return;
+            }
+
+            fetch(`http://localhost:8080/web-app-23544/api/orador?id=${id}`, {
+                method: "DELETE",
+            })
+            .then(response => response) 
+            .then(json => {
+                alert(`se ha eliminado el orador id: ${id}`);
+                listarOradores();
+            })
+            .catch(err => console.log(err));
+        }
+    </script>
+  
+  <!-- <script>
+    listarOradores(); // Llama a la función al cargar la página
+</script> -->
+
+</body>
+</html>
